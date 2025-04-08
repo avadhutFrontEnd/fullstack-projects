@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  /* // Dark theme base colors */
+  --color-dark-bg: #121212;
+  --color-dark-secondary: #252525;
+  --color-dark-tertiary: #2d2d2d;
+  --color-dark-text: #e0e0e0;
+  --color-dark-text-secondary: #b0b0b0;
+
+  /* // Neon accent colors */
+  --color-neon-blue: #00ccff;
+  --color-neon-purple: #b026ff;
+  --color-neon-pink: #ff00ff;
+  --color-neon-green: #00ff88;
+  --color-neon-red: #ff3366;
+  --color-neon-orange: #ff9900;
+  --color-neon-cyan: #00ffff;
+
+  --shadow-neon-blue: 0 0 5px #00ccff, 0 0 10px #00ccff;
+  --shadow-neon-purple: 0 0 5px #b026ff, 0 0 10px #b026ff;
+  --shadow-neon-green: 0 0 5px #00ff88, 0 0 10px #00ff88;
+  --shadow-neon-red: 0 0 5px #ff3366, 0 0 10px #ff3366;
+
+  --animate-pulse-neon: pulse-neon 2s infinite;
+
+  @keyframes pulse-neon {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-dark-bg text-dark-text;
+    font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+}
+
+@layer components {
+  .neon-border {
+    @apply border border-neon-blue shadow-neon-blue;
+  }
+
+  .neon-border-green {
+    @apply border border-neon-green shadow-neon-green;
+  }
+
+  .neon-border-purple {
+    @apply border border-neon-purple shadow-neon-purple;
+  }
+
+  .neon-border-red {
+    @apply border border-neon-red shadow-neon-red;
+  }
+
+  .run-button {
+    @apply bg-neon-green text-dark-bg py-1 px-3 rounded hover:shadow-neon-green transition-all duration-300;
+  }
+
+  .code-snippet {
+    @apply border-l-2 border-neon-cyan bg-dark-secondary p-4 rounded-r;
+  }
+
+  .console-output {
+    @apply bg-dark-tertiary p-4 rounded text-neon-blue font-mono;
+  }
+
+  .console-error {
+    @apply text-neon-red;
+  }
+
+  .console-warning {
+    @apply text-neon-orange;
+  }
+
+  .console-info {
+    @apply text-neon-green;
+  }
+
+  .dom-visualizer {
+    @apply border-2 border-neon-purple p-4 rounded;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-dark-tertiary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-secondary hover:bg-neon-blue transition-colors duration-300;
+  border-radius: 4px;
+}
+
+/* Code highlighting styles */
+/* .hljs\! {
+  @apply bg-dark-tertiary !important;
+} */
+
+.hljs {
+  background-color: var(--color-dark-tertiary) !important;
+}
