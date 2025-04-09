@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import ResizablePanel from './ResizablePanel';
+import MarkdownViewer from '../markdown/MarkdownViewer';
+import CodeRunner from '../code-execution/CodeRunner';
 
 function MainContent({ selectedFile }) {
   const [noteContent, setNoteContent] = useState('');
   const [splitPosition, setSplitPosition] = useState(50); // 50% split by default
+  const [codeToRun, setCodeToRun] = useState(null);
 
   // Mock loading note content (will be replaced with actual file loading)
   useEffect(() => {
@@ -79,6 +82,11 @@ Flexbox is a powerful CSS layout model.
     }
   }, [selectedFile]);
 
+  const handleRunCode = (codeData) => {
+    console.log("Running code:", codeData); // Debug log
+    setCodeToRun(codeData);
+  };
+
   return (
     <div className="flex-1 overflow-hidden flex">
       <ResizablePanel
@@ -93,10 +101,10 @@ Flexbox is a powerful CSS layout model.
           {selectedFile ? (
             <>
               <h2 className="text-lg text-neon-cyan mb-4">{selectedFile.name}</h2>
-              <div className="markdown-content">
-                {/* This will be replaced with a proper markdown renderer */}
-                <pre className="whitespace-pre-wrap">{noteContent}</pre>
-              </div>
+              <MarkdownViewer 
+                content={noteContent}
+                onRunCode={handleRunCode}
+              />
             </>
           ) : (
             <div className="flex items-center justify-center h-full text-dark-text-secondary">
@@ -108,10 +116,8 @@ Flexbox is a powerful CSS layout model.
         {/* Code Execution Area */}
         <div className="h-full bg-dark-tertiary p-4 overflow-auto">
           <h2 className="text-lg text-neon-green mb-4">Code Output</h2>
-          <div className="bg-dark-bg p-4 rounded h-full flex flex-col">
-            <div className="text-dark-text-secondary italic">
-              Run a code snippet to see its output here
-            </div>
+          <div className="bg-dark-bg p-4 rounded h-full">
+            <CodeRunner lastExecuted={codeToRun} />
           </div>
         </div>
       </ResizablePanel>
