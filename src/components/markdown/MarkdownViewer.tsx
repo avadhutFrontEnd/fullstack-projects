@@ -4,7 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
-import CodeBlockExtractor from './CodeBlockExtractor';
+import CodeBlockExtractor from './CodeBlockExtractor.tsx';
 
 const MarkdownViewer = ({ content, onRunCode }) => {
   return (
